@@ -1,6 +1,6 @@
-package com.epam.tc;
+package com.epam.tc.lesson01;
 
-import com.epam.tc.utils.TaxCalculationUnit;
+import com.epam.tc.lesson01.utils.TaxCalculationUnit;
 
 public class App {
     public static void main(String[] args) {
