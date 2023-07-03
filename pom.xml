@@ -158,9 +158,6 @@
   <profiles>
     <profile>
       <id>additionTests</id>
-      <activation>
-        <activeByDefault>true</activeByDefault>
-      </activation>
       <properties>
         <testng.suite.file>${testng.configs.path}/DemonstrationForTestNgXml.xml</testng.suite.file>
       </properties>
@@ -175,6 +172,15 @@
       <id>allureDemo</id>
       <properties>
         <testng.suite.file>${testng.configs.path}/Lesson04Allure.xml</testng.suite.file>
+      </properties>
+    </profile>
+    <profile>
+      <id>grid</id>
+      <activation>
+        <activeByDefault>true</activeByDefault>
+      </activation>
+      <properties>
+        <testng.suite.file>${testng.configs.path}/grid.xml</testng.suite.file>
       </properties>
     </profile>
   </profiles>
