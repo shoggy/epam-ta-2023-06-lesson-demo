@@ -19,10 +19,11 @@
     <javafaker.version>1.0.2</javafaker.version>
     <slf4j-simple.version>1.7.35</slf4j-simple.version>
     <lombok.version>1.18.22</lombok.version>
-    <allure-testng.version>2.17.2</allure-testng.version>
+    <allure-testng.version>2.19.0</allure-testng.version>
     <commons-io.version>2.11.0</commons-io.version>
     <aspectj.version>1.9.7</aspectj.version>
     <allure-maven.version>2.11.2</allure-maven.version>
+    <jdi.version>1.4.11</jdi.version>
 
     <testng.configs.path>${project.build.testOutputDirectory}</testng.configs.path>
 
@@ -45,23 +46,6 @@
       <scope>test</scope>
     </dependency>
     <dependency>
-      <groupId>org.seleniumhq.selenium</groupId>
-      <artifactId>selenium-java</artifactId>
-      <version>${selenium.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>io.github.bonigarcia</groupId>
-      <artifactId>webdrivermanager</artifactId>
-      <version>${webdrivermanager.version}</version>
-    </dependency>
-
-    <dependency>
-      <groupId>com.github.javafaker</groupId>
-      <artifactId>javafaker</artifactId>
-      <version>${javafaker.version}</version>
-    </dependency>
-
-    <dependency>
       <groupId>org.slf4j</groupId>
       <artifactId>slf4j-simple</artifactId>
       <version>${slf4j-simple.version}</version>
@@ -80,6 +64,11 @@
       <groupId>commons-io</groupId>
       <artifactId>commons-io</artifactId>
       <version>${commons-io.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>com.epam.jdi</groupId>
+      <artifactId>jdi-light-html</artifactId>
+      <version>${jdi.version}</version>
     </dependency>
   </dependencies>
 
@@ -100,7 +89,8 @@
         <artifactId>maven-surefire-plugin</artifactId>
         <version>${maven-surefire-plugin.version}</version>
         <configuration>
-          <argLine>-javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
+          <argLine>
+            -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
             --add-opens java.base/java.lang=ALL-UNNAMED
           </argLine>
           <suiteXmlFiles>
@@ -176,11 +166,17 @@
     </profile>
     <profile>
       <id>grid</id>
+      <properties>
+        <testng.suite.file>${testng.configs.path}/grid.xml</testng.suite.file>
+      </properties>
+    </profile>
+    <profile>
+      <id>jdi</id>
       <activation>
         <activeByDefault>true</activeByDefault>
       </activation>
       <properties>
-        <testng.suite.file>${testng.configs.path}/grid.xml</testng.suite.file>
+        <testng.suite.file>${testng.configs.path}/jdi.xml</testng.suite.file>
       </properties>
     </profile>
   </profiles>
