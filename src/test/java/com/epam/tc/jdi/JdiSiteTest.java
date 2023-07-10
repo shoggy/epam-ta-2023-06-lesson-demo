@@ -5,6 +5,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import com.epam.jdi.light.driver.WebDriverUtils;
 import com.epam.jdi.light.elements.init.PageFactory;
+import com.epam.tc.jdi.entities.User;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Test;
@@ -34,5 +35,15 @@ public class JdiSiteTest {
         assertThat(actualCount)
             .as(() -> format("Expected benefits: %s, but actual: %s", EXPECTED_BENEFITS_COUNT, actualCount))
             .isEqualTo(EXPECTED_BENEFITS_COUNT);
+    }
+
+    @Test
+    public void loginTest() {
+        final User user = new User("Roman", "Jdi1234", "Roman Iovlev");
+        JdiSite.open();
+        JdiSite.login(user);
+        final String actualUserName = JdiSite.getUserName();
+        assertThat(actualUserName)
+            .isEqualToIgnoringCase(user.getFullName());
     }
 }
